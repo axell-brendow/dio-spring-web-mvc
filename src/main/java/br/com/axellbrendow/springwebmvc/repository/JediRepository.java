@@ -8,9 +8,13 @@ import java.util.List;
 
 @Repository
 public class JediRepository {
+    private final List<Jedi> jedis = new ArrayList<>();
+
     public List<Jedi> getAllJedi() {
-        final var jedis = new ArrayList<Jedi>();
-        jedis.add(new Jedi("Luke", "Skywalker"));
         return jedis;
+    }
+
+    public void add(Jedi jedi) {
+        jedis.add(jedi);
     }
 }
