@@ -6,10 +6,9 @@ import br.com.axellbrendow.springwebmvc.repository.JediRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 
@@ -33,5 +32,10 @@ public class JediResource {
             return ResponseEntity.notFound().build();
 //            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
         }
+    }
+
+    @PostMapping("/api/jedi")
+    public Jedi create(@Valid @RequestBody Jedi jedi) {
+        return repository.save(jedi);
     }
 }
