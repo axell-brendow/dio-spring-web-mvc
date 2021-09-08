@@ -1,7 +1,11 @@
 package br.com.axellbrendow.springwebmvc.model;
 
+import javax.validation.constraints.NotBlank;
+
 public class Jedi {
+    @NotBlank
     private String name;
+    @NotBlank
     private String lastName;
 
     public Jedi(String name, String lastName) {
