@@ -35,6 +35,7 @@ public class JediResource {
     }
 
     @PostMapping("/api/jedi")
+    @ResponseStatus(HttpStatus.CREATED)
     public Jedi create(@Valid @RequestBody Jedi jedi) {
         return repository.save(jedi);
     }
