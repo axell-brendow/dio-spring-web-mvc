@@ -38,4 +38,20 @@ public class JediResource {
     public Jedi create(@Valid @RequestBody Jedi jedi) {
         return repository.save(jedi);
     }
+
+    @PutMapping("/api/jedi/{id}")
+    public ResponseEntity<Jedi> update(@PathVariable("id") Long id, @Valid @RequestBody Jedi jedi) {
+        try {
+            var jediOnDb = repository.findById(id).orElseThrow(() -> new NotFoundException(id));
+            jediOnDb.setName(jedi.getName());
+            jediOnDb.setLastName(jedi.getLastName());
+            repository.save(jediOnDb);
+            return ResponseEntity.ok(jediOnDb);
+        } catch (NotFoundException e) {
+//            final var errors = new HashMap<String, String>();
+//            errors.put("msg", e.getMessage());
+            return ResponseEntity.notFound().build();
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
+        }
+    }
 }
