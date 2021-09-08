@@ -55,4 +55,18 @@ public class JediResource {
 //            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
         }
     }
+
+    @DeleteMapping("/api/jedi/{id}")
+    public ResponseEntity<Jedi> delete(@PathVariable("id") Long id) {
+        try {
+            var jedi = repository.findById(id).orElseThrow(() -> new NotFoundException(id));
+            repository.delete(jedi);
+            return ResponseEntity.noContent().build();
+        } catch (NotFoundException e) {
+//            final var errors = new HashMap<String, String>();
+//            errors.put("msg", e.getMessage());
+            return ResponseEntity.notFound().build();
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
+        }
+    }
 }
